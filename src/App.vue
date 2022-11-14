@@ -1,7 +1,6 @@
 <template>
 <div id="app" :class="typeof weather.main !='undefined' && weather.main.temp > 16 ? 'warm' : ''">
   <main>
-    <div v-if="weather">
       <div class="searchBox">
       <input 
        type="text"
@@ -22,11 +21,6 @@
         <div class="weather"> {{ weather.weather[0].main}}</div>
       </div>
     </div>
-    </div>
-    <div v-else>
-      <P>City not found</P>
-    </div>
-    
   </main>
 </div>
 </template>
@@ -40,8 +34,7 @@ export default {
       api_key: "27bcc252742830381afd6856832da01a",
       url_base: "https://api.openweathermap.org/data/2.5/",
       searchValue:'',
-      weather:{},
-      err:'city not found'
+      weather:{}
     }
   },
   methods:{
@@ -53,11 +46,6 @@ export default {
         }
       ).then(
         this.setResults
-      ).catch(
-        (error)=>{
-          console.error(error)
-          this.weather={};
-        }
       )
     },
     setResults(results){
